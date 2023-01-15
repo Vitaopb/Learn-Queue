@@ -7,31 +7,52 @@ class File {
 
   async create() {
     try {
-      // Create file in database
+      return await prisma.file.create({
+        data: {
+          name: this.name,
+          path: this.path,
+        },
+      });
     } catch (error) {
       return error;
     }
   }
 
-  async update() {
+  async update(id, name, path) {
     try {
-      // Update file in database
+      return await prisma.file.update({
+        where: {
+          id: id,
+        },
+        data: {
+          name,
+          path,
+        },
+      });
     } catch (error) {
       return error;
     }
   }
 
-  async delete() {
+  async delete(id) {
     try {
-      // Delete file from database
+      return await prisma.file.delete({
+        where: {
+          id: id,
+        },
+      });
     } catch (error) {
       return error;
     }
   }
 
-  async read() {
+  async read(id) {
     try {
-      // Read file from database
+      return await prisma.file.findUnique({
+        where: {
+          id: id,
+        }
+      });
     } catch (error) {
       return error;
     }
