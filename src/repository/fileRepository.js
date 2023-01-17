@@ -1,16 +1,11 @@
 import { prisma } from "../database/prismaClient";
 class File {
-  constructor(name, path) {
-    this.name = name;
-    this.path = path;
-  }
-
-  async create() {
+  async create(name, path) {
     try {
       return await prisma.file.create({
         data: {
-          name: this.name,
-          path: this.path,
+          name,
+          path
         },
       });
     } catch (error) {

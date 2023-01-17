@@ -5,7 +5,7 @@ const blobService = BlobServiceClient.fromConnectionString(
   process.env.AZURE_STORAGE_CONNECTION_STRING
 );
 
-const containerClient = blobService.getContainerClient("private");
+const containerClient = blobService.getContainerClient("public");
 
 async function createBlob(base64, extension) {
   try {
