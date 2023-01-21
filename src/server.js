@@ -18,6 +18,6 @@ app.use(
 
 app.use(express.static("public"));
 app.use('/api', router);
-app.listen(3000, () => {
-  console.log('Server is listening on port 3000');
+app.listen(3333, () => {
+  console.log('Server is listening on port 3333');
 });

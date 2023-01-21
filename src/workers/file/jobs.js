@@ -1,11 +1,10 @@
-import { Worker, Job } from "bullmq";
 import { createBlob } from "../../providers/azureStorage";
 import File from "../../repository/fileRepository";
 
 const _fileRepository = new File();
-const saveInStorageAndDb = new Worker("addFiles", async (job) => {
+const saveInStorageAndDb = async (job) => {
   const files = job.data;
-
+  console.log(files);
   for (const file of files) {
     const url = await Promise((resolve, reject) => {
       return resolve(
@@ -19,14 +18,13 @@ const saveInStorageAndDb = new Worker("addFiles", async (job) => {
       );
     });
 
-    const fileCreated = await _fileRepository.create(file.name, url)
+    const fileCreated = await _fileRepository.create(file.name, url);
 
     return fileCreated;
   }
-});
+};
 
-
-const deleteInStorageAndDb = new Worker("files", async (job) => {
+const deleteInStorageAndDb = async (job) => {
   const files = job.data;
 
   for (const file of files) {
@@ -44,6 +42,6 @@ const deleteInStorageAndDb = new Worker("files", async (job) => {
 
     await _fileRepository.delete(file.id);
   }
-});
+};
 
-export { saveInStorageAndDb }
+export { saveInStorageAndDb };

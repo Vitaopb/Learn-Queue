@@ -1,4 +1,4 @@
-import { prisma } from "../database/prismaClient";
+import { prisma } from "database/prismaClient";
 class File {
   async create(name, path) {
     try {

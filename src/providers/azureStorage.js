@@ -2,14 +2,16 @@ import { BlobServiceClient } from "@azure/storage-blob";
 import { v4 as uuid } from "uuid";
 
 const blobService = BlobServiceClient.fromConnectionString(
-  process.env.AZURE_STORAGE_CONNECTION_STRING
+  'DefaultEndpointsProtocol=https;AccountName=victorlearns;AccountKey=PMU6ktzYxRjQQLoxY/BNW5HE4Bnp4wwI1NFGymGOfszUzZWa0JS4mEs0WQDL2+c1ymxI4EIyX6i3+AStv7z3mw==;EndpointSuffix=core.windows.net'
 );
 
 const containerClient = blobService.getContainerClient("public");
 
 async function createBlob(base64, extension) {
   try {
+
     const filename = `${uuid()}.${extension}`;
+    console.log(filename);
     const data = base64.split(",")[1];
     const buffer = Buffer.from(data, "base64");
 

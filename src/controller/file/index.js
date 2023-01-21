@@ -2,7 +2,7 @@ import { addQueue, removeQueue } from '../../providers/bull'
 
 const saveFiles = async (req, res) => {
   try {
-    const files = req.body;
+    const { files } = req.body;
     await addQueue.addBulk(files);
     return res.status(200).json({ message: 'Files added to queue' });
   } catch (error) {
